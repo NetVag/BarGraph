@@ -1,52 +1,67 @@
 <template>
-  <bargraph :series="series" :font="font"></bargraph>
+  <div><act-bargraph :graph-data="graphData"></act-bargraph></div>
 </template>
 
 <script>
-import bargraph from "./components/bargraph";
+import ActBargraph from "./components/act-bargraph";
 export default {
   name: "App",
   components: {
-    bargraph,
+    ActBargraph
   },
   data() {
     //父组件定义全局数据，方便传给需要的子组件们
     //return一定要有，因为data在这里是一个函数方法，不然函数返回的就是undefined
     return {
-      font: 20,
-      series: [
-        {
-          //学科名
-          name: "科目",
-          data: ["平均分", "物理", "历史", "化学"],
-          color: null,
+      //垂直拆分：柱状图组件参数（采用）
+        graphData: {
+          series: [
+            {
+              //科目名称
+              subjectName: '地理',
+              //满分
+              fullMark: 100,
+              //标记线
+              markLine: [
+                {
+                  //标记线名称（图例名称）
+                  markLineName: '考生分数',
+                  //标记线分数
+                  markLineScore: 98,
+                  //类型（0为考生分数；1为其他，如：省平均、市平均）
+                  type: 0,
+                  //标记线颜色
+                  markLineColor: '#B8741A',
+                },
+              ],
+            },
+            {
+              subjectName: '生物',
+              fullMark: 100,
+              markLine: [
+                {
+                  markLineName: '考生分数',
+                  markLineScore: 94,
+                  type: 0,
+                  markLineColor: '#B8741A',
+                },
+              ],
+            },
+            {
+              subjectName: '历史',
+              fullMark: 100,
+              markLine: [
+                {
+                  markLineName: '考生分数',
+                  markLineScore: 74,
+                  type: 0,
+                  markLineColor: '#B8741A',
+                },
+              ],
+            },
+          ],
         },
-        {
-          //总分
-          name: "每科满分",
-          data: [100, 100, 100, 100, 100],
-          color: null,
-        },
-        {
-          //学生分数
-          name: "考生分数",
-          data: [92.5, 82, 93, 98, 93],
-          color: "#B8741A"
-        },
-        {
-          //省平均
-          name: "省平均",
-          data: [61.12, 66.5, 56.14, 62.51, 44.1],
-          color: "#420080"
-        },
-        {
-          //市平均
-          name: "市平均",
-          data: [74.52, 76.5, 66.25, 54.1, 56.2],
-          color: "#95F204"
-        },
-      ],
     };
-  },
+  }
 };
 </script>
